@@ -27,7 +27,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".StarActivity"></activity>
+        <activity android:name=".StarActivity" />
+        <activity android:name=".PagerActivity"></activity>
     </application>
 
 </manifest>

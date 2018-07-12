@@ -36,9 +36,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<ListenItem> listenItems;
 
+    DatabaseHelper myDb;
+
 
     Context context;
     int lastPosition = -1;
+
+
+
 
 
     public MyAdapter(List<ListenItem> listenItems, Context context) {
@@ -67,6 +72,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Toast.makeText(context,"clicked",Toast.LENGTH_LONG).show();
             }
         });
+
 
 
 
@@ -105,6 +111,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
             cardView=ItemView.findViewById(R.id.card);
         }
+
+
+
+    }
+    public void removeItem(int position) {
+        listenItems.remove(position);
+        // notify the item removed by position
+        // to perform recycler view delete animations
+        // NOTE: don't call notifyDataSetChanged()
+        notifyItemRemoved(position);
 
 
 

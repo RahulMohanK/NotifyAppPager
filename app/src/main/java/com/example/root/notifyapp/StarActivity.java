@@ -1,6 +1,9 @@
 package com.example.root.notifyapp;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +23,7 @@ public class StarActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private ProgressBar progressBar;
+    SwipeController swipeController = null;
 
 
     public static String s;
@@ -48,7 +52,74 @@ public class StarActivity extends AppCompatActivity {
         // insertData();
         showData();
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        SwipeHelper swipeHelper = new SwipeHelper(this, recyclerView) {
+            @Override
+            public void instantiateUnderlayButton(final RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
+                underlayButtons.add(new SwipeHelper.UnderlayButton(
+                        "Confirm",
+                        0,
+                        Color.parseColor("#C7C7CB"),
+                        new SwipeHelper.UnderlayButtonClickListener() {
+                            @Override
+                            public void onClick(int pos) {
+
+
+
+
+                                        Toast.makeText(StarActivity.this,"Confirmed",Toast.LENGTH_SHORT).show();
+                                // TODO: onDelete
+                            }
+                        }
+                ));
+
+                /*underlayButtons.add(new SwipeHelper.UnderlayButton(
+                        "Cancel",
+                        0,
+                        Color.parseColor("#FFFFFF"),
+                        new SwipeHelper.UnderlayButtonClickListener() {
+                            @Override
+                            public void onClick(int pos) {
+                                // TODO: OnTransfer
+                            }
+                        }
+                ));/*
+                underlayButtons.add(new SwipeHelper.UnderlayButton(
+                        "Unshare",
+                        0,
+                        Color.parseColor("#C7C7CB"),
+                        new SwipeHelper.UnderlayButtonClickListener() {
+                            @Override
+                            public void onClick(int pos) {
+                                // TODO: OnUnshare
+                            }
+                        }
+                ));*/
+            }
+        };
+
+       /*swipeController = new SwipeController(new SwipeControllerActions() {
+
+
+            @Override
+            public void onRightClicked(int position) {
+
+                diss(position);
+
+            }
+        });
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+
+        itemTouchhelper.attachToRecyclerView(recyclerView);
+
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                swipeController.onDraw(c);
+            }
+        });
+
+        /*new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -59,7 +130,7 @@ public class StarActivity extends AppCompatActivity {
 
                 diss(viewHolder.getAdapterPosition());
             }
-        }).attachToRecyclerView(recyclerView);
+        }).attachToRecyclerView(recyclerView);*/
     }
 
     public void showData( ){

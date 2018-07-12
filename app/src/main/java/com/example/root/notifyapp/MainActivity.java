@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper myDb;
 
-    private static Button show_text,got,star;
+    private static Button show_text,got,star,vv;
     private static TextView clipboardData;
 
     @Override
@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         star= (Button) findViewById(R.id.button2);
 
+
+        vv=(Button)findViewById(R.id.button3);
 
         //clipboardData = (TextView) findViewById(R.id.clipboard_data);//
 
@@ -55,6 +57,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        vv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iiii = new Intent(MainActivity.this,PagerActivity.class);
+                startActivity(iiii);
+            }
+        });
 
         //showData();//
 

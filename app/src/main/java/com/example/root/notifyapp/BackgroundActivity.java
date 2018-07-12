@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -21,7 +23,7 @@ public class BackgroundActivity extends AppCompatActivity {
 
     DatabaseHelper myDb;
 
-    MyAdapter adapterr;
+
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private ProgressBar progressBar;
@@ -44,8 +46,12 @@ public class BackgroundActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
 
+
+        recyclerView.setAdapter(adapter);
 
 
         // progressBar = (ProgressBar) findViewById(R.id.progressBar);//
@@ -67,7 +73,10 @@ public class BackgroundActivity extends AppCompatActivity {
            @Override
            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
-               diss(viewHolder.getAdapterPosition());
+             // adapterr.removeItem(viewHolder.getAdapterPosition());
+
+              diss(viewHolder.getAdapterPosition());
+               //adapterr.notifyDataSetChanged();
            }
        }).attachToRecyclerView(recyclerView);
     }
@@ -152,6 +161,9 @@ public class BackgroundActivity extends AppCompatActivity {
         myDb = new DatabaseHelper(this);
 
         myDb.updateData(listen.getLink());
+        listenItems.remove(pos);
+        adapter.notifyItemRemoved(pos);
+        //adapterr.notifyDataSetChanged();
         //holder.imageView.setImageResource(R.drawable.ic_star_old);
         Toast.makeText(this,"Starred",Toast.LENGTH_LONG).show();
 
