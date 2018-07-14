@@ -1,12 +1,15 @@
 package com.example.root.notifyapp;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static Button show_text,got,star,vv;
     private static TextView clipboardData;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         myDb = new DatabaseHelper(this);
 
         show_text = (Button) findViewById(R.id.show_text);
+        linearLayout = findViewById(R.id.linear_layout);
 
         got = (Button) findViewById(R.id.button);
 
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent ii = new Intent(MainActivity.this,BackgroundActivity.class);
+
+
                 startActivity(ii);
             }
         });
@@ -57,13 +64,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        vv.setOnClickListener(new View.OnClickListener() {
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent ii = new Intent(MainActivity.this,BackgroundActivity.class);
+
+
+                startActivity(ii);
+                overridePendingTransition(R.anim.slide_from_left,R.anim.slide_to_right);
+            }
+        });
+
+       vv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent iiii = new Intent(MainActivity.this,PagerActivity.class);
+
+
                 startActivity(iiii);
+
             }
         });
+
+        /*Intent iiii = new Intent(MainActivity.this,StarActivity.class);
+
+        overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);
+
+        startActivity(iiii);*/
 
         //showData();//
 

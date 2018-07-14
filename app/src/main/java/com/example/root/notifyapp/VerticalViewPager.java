@@ -9,7 +9,7 @@ import android.view.View;
 
 public class VerticalViewPager extends ViewPager {
 
-    private OnItemClickListener mOnItemClickListener;
+   // private OnItemClickListener mOnItemClickListener;
     public VerticalViewPager(Context context) {
         super(context);
         init();
@@ -31,36 +31,8 @@ public class VerticalViewPager extends ViewPager {
         setOverScrollMode(OVER_SCROLL_NEVER);
 
 
-        final GestureDetector tapGestureDetector = new    GestureDetector(getContext(), new TapGestureListener());
-
-        setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                tapGestureDetector.onTouchEvent(event);
-                return false;
-            }
-        });
-
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        OnItemClickListener mOnItemClickListener = onItemClickListener;
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    private class TapGestureListener extends GestureDetector.SimpleOnGestureListener {
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            if(mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(getCurrentItem());
-            }
-            return true;
-        }
-    }
 
     public class PageTransformer implements ViewPager.PageTransformer {
 

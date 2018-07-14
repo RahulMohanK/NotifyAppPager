@@ -28,7 +28,14 @@
             android:exported="true" />
 
         <activity android:name=".StarActivity" />
-        <activity android:name=".PagerActivity"></activity>
+        <activity
+            android:name=".PagerActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GraphActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".WebActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -15,10 +15,15 @@ import java.util.List;
 
 public class PagerActivity extends AppCompatActivity{
 
-    private String[] data;
+
+    private String[] data,data1;
     ViewPager viewPager;
     private List<ListenItem> listenItems;
     DatabaseHelper myDb;
+    String pos;
+    int value =-1;
+
+
 
 
     @Override
@@ -26,14 +31,32 @@ public class PagerActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_pager);
-
+       /* Intent i = getIntent();
+        pos= i.getStringExtra("pos");
+        value = Integer.parseInt(pos);
+*/
         viewPager = (ViewPager) findViewById(R.id.vertical_viewPager);
 
         listenItems = new ArrayList<>();
         myDb = new DatabaseHelper(this);
 
+
+
         initData();
+
+
+
+
         initView();
+
+        //Selected(value);
+
+        /*Intent iiii = new Intent(PagerActivity.this,MainActivity.class);
+
+
+        startActivity(iiii);
+        overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);*/
+
 
 
 
@@ -44,36 +67,29 @@ public class PagerActivity extends AppCompatActivity{
 
     private void initData() {
         Cursor res = myDb.getAllData();
-
-
-        /*if(res.getCount()==0)
-        {
-            showMessage("Error","Nothing Found");
-            return;
-        }*/
-
         while (res.moveToNext()) {
-
             ListenItem item = new ListenItem(res.getString(1));
             listenItems.add(item);
-
-
-        }
-
+            }
         this.data = new String[listenItems.size()];
-
-
-
-    }
+        }
     private void initView() {
         for (int i = 0; i < listenItems.size(); i++) {
 
-            this.data[i]=listenItems.get(i).toString();
+
+            this.data[i]=listenItems.get(i).getLink();
             PageAdapter viewPageAdapter = new PageAdapter(getSupportFragmentManager(), data);
             viewPager.setAdapter(viewPageAdapter);
         }
 
     }
+    private void Selected(int value){
+
+        data1[0] = data[value];
+        PageAdapter viewPageAdapter = new PageAdapter(getSupportFragmentManager(),data1);
+        viewPager.setAdapter(viewPageAdapter);
+    }
+
 
 
 

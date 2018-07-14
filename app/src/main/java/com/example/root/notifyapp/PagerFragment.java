@@ -7,9 +7,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -25,10 +31,11 @@ public class PagerFragment extends Fragment {
     private TextView titleView;
     private int page_id;
 
+    ImageView imageView,imageView2;
 
 
 
-    private static final int[] colors = new int[]{
+   /* private static final int[] colors = new int[]{
             Color.CYAN,
             Color.WHITE,
             Color.RED,
@@ -36,7 +43,7 @@ public class PagerFragment extends Fragment {
             Color.GREEN,
             Color.GRAY,
             Color.YELLOW
-    };
+    };*/
 
 
 
@@ -67,14 +74,33 @@ public class PagerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_page, container, false);
+        final View view = inflater.inflate(R.layout.fragment_page, container, false);
         this.titleView = (TextView) view.findViewById(R.id.txt_title);
         titleView.setText(title);
+        this.imageView = view.findViewById(R.id.imageView);
         //this.cardView = view.findViewById(R.id.cardview1);
+        this.imageView2 = view.findViewById(R.id.imageView2);
+       imageView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent i = new Intent(getActivity(),GraphActivity.class);
+               startActivity(i);
+              //view.startAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_from_right));
+           }
+       });
 
 
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(),WebActivity.class);
+                startActivity(i);
+                //view.startAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.slide_from_right));
+            }
+        });
 
-        view.setBackgroundColor(colors[page_id % colors.length]);
+
+        view.setBackgroundColor(Color.WHITE);
 
         return view;
     }

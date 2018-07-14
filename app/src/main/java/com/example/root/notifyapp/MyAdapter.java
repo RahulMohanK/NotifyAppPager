@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -60,7 +61,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
     @Override
-    public void onBindViewHolder(final MyAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final MyAdapter.ViewHolder holder, final int position) {
 
         final ListenItem listen = listenItems.get(position);
 
@@ -69,6 +70,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(context,PagerActivity.class);
+                i.putExtra("pos",position);
+                context.startActivity(i);
                 Toast.makeText(context,"clicked",Toast.LENGTH_LONG).show();
             }
         });
